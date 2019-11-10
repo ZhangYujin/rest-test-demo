@@ -1,11 +1,12 @@
 package com.focsim.demo.api;
 
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -13,11 +14,14 @@ import static org.hamcrest.Matchers.*;
  * @createdOn 2019/11/9.
  */
 @SpringBootTest
+@AutoConfigureMockMvc
 public class DemoControllerTests {
+
 
     @Test
     public void test() {
-        RestAssured.get("/api/health").then().body("message", equalTo("success"));
+        get("/api/health").then().body("message", equalTo("success"));
     }
+
 
 }

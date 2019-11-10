@@ -6,10 +6,10 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://basic.gz.cvte.cn:3316/sample?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: root
+    password: 123456
     driverClassName: com.mysql.cj.jdbc.Driver
     initialSize: 5
     minIdle: 5
@@ -23,3 +23,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
+  jpa:
+    database: MySQL
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
