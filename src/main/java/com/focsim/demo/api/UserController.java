@@ -4,6 +4,7 @@ import com.focsim.demo.entity.User;
 import com.focsim.demo.model.details.UserDetails;
 import com.focsim.demo.model.form.UserCreateForm;
 import com.focsim.demo.service.UserService;
+import com.focsim.demo.utils.DtoUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,7 @@ import javax.validation.ValidationException;
  * @date 2019/11/10 10:30 AM
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class UserController {
         UserDetails userDetails = new UserDetails();
         User user = userService.findOne(id);
         if (user != null) {
-            BeanUtils.copyProperties(user, userDetails);
+            DtoUtils.mapTo(user, userDetails, true);
         }
 
 
@@ -58,8 +59,7 @@ public class UserController {
         }
 
         User user = userService.create(form);
-        UserDetails userDetails = new UserDetails();
-        BeanUtils.copyProperties(user, userDetails);
+        UserDetails userDetails = DtoUtils.map(user, UserDetails.class, true);
 
         return userDetails;
     }

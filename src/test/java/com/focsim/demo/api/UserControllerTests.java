@@ -7,17 +7,16 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 /**
+ * 用户相关接口测试
+ *
  * @author zhangyujin
- * @createdOn 2019/11/9.
+ * @createdOn 2019/11/11.
  */
 @SpringBootTest
-public class DemoControllerTests {
-
+public class UserControllerTests {
 
     @Test
-    public void test() {
-        get("/api/health").then().body("message", equalTo("success"));
+    public void testUserCreate() {
+
     }
-
-
 }
