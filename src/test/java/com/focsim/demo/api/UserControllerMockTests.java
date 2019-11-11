@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -23,18 +25,31 @@ public class UserControllerMockTests {
     private MockMvc mvc;
 
     @Test
-    public void testUserController() throws Exception {
+    public void testFindOne() throws Exception {
 
         // 1.查询列表
-        mvc.perform(MockMvcRequestBuilders.get("/api/users/{id}",1))
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/{id}", 1))
                 .andExpect(MockMvcResultMatchers.status().isOk());// 判断响应状态是否成功
 
+    }
+
+    @Test
+    public void testCreate1() throws Exception {
         // 2.添加
         mvc.perform(MockMvcRequestBuilders.post("/api/users")
-                .param("password","123456")
-                .param("name","zhangyujin")
-                .param("gender","male"))
+                .param("password", "123456")
+                .param("name", "zhangyujin")
+                .param("gender", "male"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
+    }
+
+    @Test
+    public void testCreate2() throws Exception {
+        // 2.添加
+        mvc.perform(MockMvcRequestBuilders.post("/api/users")
+                .content("{\"name\":\"json\",\"password\":\"1234\",\"gender\":\"male\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("1234"));
     }
 }

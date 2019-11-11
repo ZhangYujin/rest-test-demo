@@ -52,7 +52,7 @@ public class UserController {
      * @param result
      * @return
      */
-    @PostMapping()
+    @PostMapping
     public UserDetails create(@RequestBody @Valid UserCreateForm form, BindingResult result) {
         if (result.hasErrors()) {
             throw new ValidationException("Param Invalid");
