@@ -2,14 +2,16 @@
 
 # 检查上一步执行状态
 function checkStatus() {
+
+  status=$?
   message="上一步"
   if [ -n "$1" ];then
     message=$1
   fi
 
-  if [ $? -ne 0 ]; then
+  if [ $status -ne 0 ]; then
     echo ${message}" 执行失败，终止执行"
-    exit
+    exit 1
   else
     echo ${message}" 执行成功，往下执行"
   fi
