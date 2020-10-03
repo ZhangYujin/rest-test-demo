@@ -10,4 +10,4 @@ if [ -z $docker_image ];then
 fi
 
 
-docker run -p 8080:8080 focsim/demo:$docker_image
+docker run -p 9080:8080 focsim/demo:$docker_image
